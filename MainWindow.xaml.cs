@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace Z3_binding_do_klas
 {
@@ -23,6 +24,17 @@ namespace Z3_binding_do_klas
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OtwórzSzczegółyKategorii(object sender, RoutedEventArgs e)
+        {
+            new SzczegółyKategorii((XmlElement)ListaKategorii.SelectedItem).Show();
+        }
+
+        private void DodajNowyElement(object sender, RoutedEventArgs e)
+        {
+            Dodawanie okno = new Dodawanie();
+            okno.Show();
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace Z3_binding_do_klas
 {
@@ -19,8 +20,9 @@ namespace Z3_binding_do_klas
     /// </summary>
     public partial class SzczegółyKategorii : Window
     {
-        public SzczegółyKategorii()
+        public SzczegółyKategorii(XmlElement kategoria)
         {
+            DataContext = kategoria;
             InitializeComponent();
         }
     }
