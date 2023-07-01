@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:Z3_binding_do_klas"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <XmlDataProvider
+             x:Key="DaneXML"
+             Source="elementy.xml"
+             XPath="Kategorie"
+             />
     </Application.Resources>
 </Application>
