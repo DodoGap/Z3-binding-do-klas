@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Z3_binding_do_klas"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+    Title="Lista kategorii"
+    Height="300"
+    Width="300"
+    >
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <ListBox Name="ListaKategorii">
+            <ListBox.ItemsSource>
+                <Binding
+                    Source="{StaticResource DaneXML}"
+                    XPath="Kategoria"
+                    />
+            </ListBox.ItemsSource>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Text="{Binding XPath=@Nazwa}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
+            <Button Click="OtwórzSzczegółyKategorii" Height="30" 
+            >Sczegóły</Button>
+            <Button Click="DodajNowyElement" Height="30" 
+            >Dodaj</Button>
+            <Button Click="DodajNowyElement" Height="30" 
+            >Usuń</Button>
+            <Button Click="DodajNowyElement" Height="30" 
+            >Import do pliku</Button>
+            <Button Click="DodajNowyElement" Height="30" 
+            >Export z pliku</Button>
+        </StackPanel>
     </Grid>
 </Window>

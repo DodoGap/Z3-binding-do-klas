@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="SzczegółyKategorii.xaml.cs">
       <DependentUpon>SzczegółyKategorii.xaml</DependentUpon>
     </Compile>
