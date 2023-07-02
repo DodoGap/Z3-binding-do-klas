@@ -10,7 +10,7 @@ namespace Z3_binding_do_klas
 {
     public class MainListaAlbumow : INotifyPropertyChanged
     {
-        private const string sciezkaIO = "listaAlbumow.xml";
+        private const string sciezkaIO = "./listaAlbumow.xml";
         public ObservableCollection<Album> ListaAlbumow { get; set; } = new ObservableCollection<Album>();
 
         private Album wybranyAlbum;

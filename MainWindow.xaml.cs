@@ -11,14 +11,15 @@ namespace Z3_binding_do_klas
     {
         private const string sciezkaIO = "listaAlbumow.xml";
         public ObservableCollection<Album> Albumy { get; set; } = new ObservableCollection<Album>();
+        private MainListaAlbumow viewModel;
 
 
         public MainWindow()
         {
             InitializeComponent();
+            lista = FindName("lista") as ListBox;
+            DataContext = this;
 
-            var viewModel = new MainListaAlbumow();
-            DataContext = viewModel;
 
             // Deserializacja danych z pliku XML i przypisanie ich do kolekcji Albumy
             XmlSerializer serializer = new XmlSerializer(typeof(List<Album>));
@@ -27,7 +28,7 @@ namespace Z3_binding_do_klas
                 List<Album> deserializedAlbumy = (List<Album>)serializer.Deserialize(stream);
                 foreach (Album album in deserializedAlbumy)
                 {
-                    viewModel.DodajAlbum(album);
+                    Albumy.Add(album);
                 }
             }
         }
@@ -38,45 +39,34 @@ namespace Z3_binding_do_klas
             DodajAlbum oknoDodaj = new DodajAlbum(nowyAlbum);
             if (oknoDodaj.ShowDialog() == true)
             {
-                var viewModel = (MainListaAlbumow)DataContext;
                 viewModel.DodajAlbum(nowyAlbum);
             }
         }
-
 
         private void EdytujButton_Click(object sender, RoutedEventArgs e)
         {
             if (lista.SelectedItem != null)
             {
-                var viewModel = (MainListaAlbumow)DataContext;
-                viewModel.EdytujAlbum((Album)lista.SelectedItem);
+                new OknoEdycjaAlbumu((Album)lista.SelectedItem).Show();
             }
         }
-
 
         private void UsunButton_Click(object sender, RoutedEventArgs e)
         {
-            if (lista.SelectedItem != null)
-            {
-                var viewModel = (MainListaAlbumow)DataContext;
-                viewModel.UsunAlbum((Album)lista.SelectedItem);
-            }
+            Albumy.Remove(
+                (Album)lista.SelectedItem
+                );
         }
-
 
         private void ImportujButton_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = (MainListaAlbumow)DataContext;
             viewModel.ImportujAlbumy();
         }
 
-
         private void EksportujButton_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = (MainListaAlbumow)DataContext;
             viewModel.EksportujAlbumy();
         }
-
 
     }
 }
