@@ -13,6 +13,17 @@ namespace Z3_binding_do_klas
         private const string sciezkaIO = "listaAlbumow.xml";
         public ObservableCollection<Album> ListaAlbumow { get; set; } = new ObservableCollection<Album>();
 
+        private Album wybranyAlbum;
+        public Album WybranyAlbum
+        {
+            get { return wybranyAlbum; }
+            set
+            {
+                wybranyAlbum = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainListaAlbumow()
         {
             ImportujAlbumy();
@@ -68,9 +79,9 @@ namespace Z3_binding_do_klas
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void ZmienWlasciwosc([CallerMemberName] string nazwaWlasciwosci = "")
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nazwaWlasciwosci));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,67 +1,82 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.Windows;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace Z3_binding_do_klas
 {
-    public class MainListaAlbumow : INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         private const string sciezkaIO = "listaAlbumow.xml";
-        public ObservableCollection<Album> ListaAlbumow { get; set; } = new ObservableCollection<Album>();
+        public ObservableCollection<Album> Albumy { get; set; } = new ObservableCollection<Album>();
 
-        public MainListaAlbumow()
-        {
-            ImportujAlbumy();
-        }
 
-        public void DodajAlbum(Album album)
+        public MainWindow()
         {
-            ListaAlbumow.Add(album);
-            ZapiszAlbumy();
-        }
+            InitializeComponent();
 
-        public void EdytujAlbum(Album album)
-        {
-            ZapiszAlbumy();
-        }
+            var viewModel = new MainListaAlbumow();
+            DataContext = viewModel;
 
-        public void UsunAlbum(Album album)
-        {
-            ListaAlbumow.Remove(album);
-            ZapiszAlbumy();
-        }
-
-        public void ImportujAlbumy()
-        {
-            if (File.Exists(sciezkaIO))
+            // Deserializacja danych z pliku XML i przypisanie ich do kolekcji Albumy
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Album>));
+            using (FileStream stream = new FileStream(sciezkaIO, FileMode.Open))
             {
-                XmlSerializer serializator = new XmlSerializer(typeof(ObservableCollection<Album>));
-                using (FileStream strumienOdczytu = new FileStream(sciezkaIO, FileMode.Open))
+                List<Album> deserializedAlbumy = (List<Album>)serializer.Deserialize(stream);
+                foreach (Album album in deserializedAlbumy)
                 {
-                    ObservableCollection<Album> albumy = (ObservableCollection<Album>)serializator.Deserialize(strumienOdczytu);
-                    ListaAlbumow = albumy;
+                    viewModel.DodajAlbum(album);
                 }
             }
         }
 
-        public void ZapiszAlbumy()
+        private void DodajButton_Click(object sender, RoutedEventArgs e)
         {
-            XmlSerializer serializator = new XmlSerializer(typeof(ObservableCollection<Album>));
-            using (TextWriter strumienZapisu = new StreamWriter(sciezkaIO))
+            Album nowyAlbum = new Album();
+            DodajAlbum oknoDodaj = new DodajAlbum(nowyAlbum);
+            if (oknoDodaj.ShowDialog() == true)
             {
-                serializator.Serialize(strumienZapisu, ListaAlbumow);
+                var viewModel = (MainListaAlbumow)DataContext;
+                viewModel.DodajAlbum(nowyAlbum);
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void ZmienWlasciwosc([CallerMemberName] string nazwaWlasciwosci = "")
+        private void EdytujButton_Click(object sender, RoutedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nazwaWlasciwosci));
+            if (lista.SelectedItem != null)
+            {
+                var viewModel = (MainListaAlbumow)DataContext;
+                viewModel.EdytujAlbum((Album)lista.SelectedItem);
+            }
         }
+
+
+        private void UsunButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (lista.SelectedItem != null)
+            {
+                var viewModel = (MainListaAlbumow)DataContext;
+                viewModel.UsunAlbum((Album)lista.SelectedItem);
+            }
+        }
+
+
+        private void ImportujButton_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (MainListaAlbumow)DataContext;
+            viewModel.ImportujAlbumy();
+        }
+
+
+        private void EksportujButton_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (MainListaAlbumow)DataContext;
+            viewModel.EksportujAlbumy();
+        }
+
+
     }
 }

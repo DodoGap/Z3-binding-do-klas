@@ -8,16 +8,13 @@ namespace Z3_binding_do_klas
         {
             InitializeComponent();
             DataContext = album;
+
         }
 
-        private void Zapisz(object sender, RoutedEventArgs e)
+        private void OK(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            Close();
         }
 
-        private void Anuluj(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-        }
     }
 }
