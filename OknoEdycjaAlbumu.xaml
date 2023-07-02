@@ -1,0 +1,30 @@
+﻿<Window x:Class="Z3_binding_do_klas.OknoEdycjaAlbumu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edycja Albumu" Height="260" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Tytuł:"/>
+        <TextBox Grid.Row="1" Text="{Binding Tytul}" Margin="5"/>
+
+        <Label Grid.Row="2" Content="Artysta:"/>
+        <TextBox Grid.Row="3" Text="{Binding Artysta}" Margin="5"/>
+
+        <Label Grid.Row="4" Content="Gatunek:"/>
+        <TextBox Grid.Row="5" Text="{Binding Gatunek}" Margin="5"/>
+
+        <Button Grid.Row="6" Content="Zapisz" Click="Zapisz" Margin="5"/>
+        <Button Grid.Row="7" Content="Anuluj" Click="Anuluj" Margin="5"/>
+    </Grid>
+</Window>

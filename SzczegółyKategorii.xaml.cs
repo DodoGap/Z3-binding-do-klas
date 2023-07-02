@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 
-namespace Z3_binding_do_klas
+namespace NET_PR3_1_Z3
 {
     /// <summary>
     /// Logika interakcji dla klasy SzczegółyKategorii.xaml

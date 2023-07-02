@@ -57,6 +57,15 @@ namespace Z3_binding_do_klas
             }
         }
 
+        public void EksportujAlbumy()
+        {
+            XmlSerializer serializator = new XmlSerializer(typeof(ObservableCollection<Album>));
+            using (TextWriter strumienZapisu = new StreamWriter(sciezkaIO))
+            {
+                serializator.Serialize(strumienZapisu, ListaAlbumow);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void ZmienWlasciwosc([CallerMemberName] string nazwaWlasciwosci = "")

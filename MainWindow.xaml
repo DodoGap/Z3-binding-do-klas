@@ -1,44 +1,31 @@
-﻿<Window x:Class="Z3_binding_do_klas.MainWindow"
+﻿<Window x:Class="Z3_binding_do_klas.MainWindow" 
+        xmlns:local="clr-namespace:Z3_binding_do_klas"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Z3_binding_do_klas"
-        mc:Ignorable="d"
-    Title="Lista kategorii"
-    Height="300"
-    Width="300"
-    >
+        Title="Album List" Height="400" Width="600">
+    <Window.DataContext>
+        <local:MainListaAlbumow/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox Name="ListaKategorii">
-            <ListBox.ItemsSource>
-                <Binding
-                    Source="{StaticResource DaneXML}"
-                    XPath="Kategoria"
-                    />
-            </ListBox.ItemsSource>
+
+        <ListBox Grid.Row="0" ItemsSource="{Binding Albumy}" SelectedItem="{Binding WybranyAlbum}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock
-                        Text="{Binding XPath=@Nazwa}"/>
+                    <TextBlock Text="{Binding Tytul}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top">
-            <Button Click="OtwórzSzczegółyKategorii" Height="30" 
-            >Sczegóły</Button>
-            <Button Click="DodajNowyElement" Height="30" 
-            >Dodaj</Button>
-            <Button Click="DodajNowyElement" Height="30" 
-            >Usuń</Button>
-            <Button Click="DodajNowyElement" Height="30" 
-            >Import do pliku</Button>
-            <Button Click="DodajNowyElement" Height="30" 
-            >Export z pliku</Button>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button Content="Dodaj" Command="{Binding DodajAlbumCommand}"/>
+            <Button Content="Edytuj" Command="{Binding EdytujLubUsunAlbumCommand}" Margin="10,0"/>
+            <Button Content="Usuń" Command="{Binding UsunAlbumCommand}"/>
+            <Button Content="Importuj" Command="{Binding ImportujAlbumCommand}" Margin="10,0"/>
+            <Button Content="Eksportuj" Command="{Binding ExportujAlbumCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

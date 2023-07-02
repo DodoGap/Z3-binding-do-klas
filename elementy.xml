@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Kategorie>
-	<Kategoria Nazwa="Punk Rock">
-		<Opis>Wszystkie Utowry Punk Rock</Opis>
+	<Kategoria Nazwa="Wszystkie utwory">
+		<Opis>Wszystkie Utowry</Opis>
 		<Elementy>
 			<Element>
 				<Utwor>Anarchy in the U.K.</Utwor>
 				<Autor>Sex Pistols</Autor>
-				<Album>Never Mind the Bollocks, Here's the Sex Pistols</Album>
+				<Album>Never Mind the Bollocks</Album>
 				<Gatunek>Punk rock</Gatunek>
 			</Element>
 			<Element>
@@ -33,11 +33,6 @@
 				<Album>Fresh Fruit for Rotting Vegetables</Album>
 				<Gatunek>Punk rock</Gatunek>
 			</Element>
-		</Elementy>
-	</Kategoria>
-	<Kategoria Nazwa="Rock and Roll">
-		<Opis>Wszystkie utwory Rock and Roll</Opis>
-		<Elementy>
 			<Element>
 				<Utwor>Stairway to Heaven</Utwor>
 				<Autor>Led Zeppelin</Autor>
@@ -68,11 +63,6 @@
 				<Album>Back in Black</Album>
 				<Gatunek>Rock, Hard rock</Gatunek>
 			</Element>
-		</Elementy>
-	</Kategoria>
-	<Kategoria Nazwa="Techno">
-		<Opis>Wszystkie Utowry Techno</Opis>
-		<Elementy>
 			<Element>
 				<Utwor>Smack My Bitch Up</Utwor>
 				<Autor>The Prodigy</Autor>
